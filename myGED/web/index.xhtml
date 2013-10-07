@@ -1,14 +1,35 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <link type="text/css" rel="stylesheet" href="default.css" />
+    <link type="text/css" rel="stylesheet" href="cssGEDAPP.css" />
     <h:head>
-        <title>Facelet Title</title>
+        <title>Ged App'</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        My Ged App' !
         <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        <p:layoutUnit position="center" style=" width: 300px; margin-top: 15%; margin-left: 37%">  
+            <h:form id="form">  
+                <p:panel id="modCon" header="LOG" >  
+                    <h:panelGrid columns="2">  
+                        <h:outputText value="Name : " />  
+                        <p:inputText id="name" value="#{userController.user.nomUser}" />
+                        <h:outputText value="LastName : " />  
+                        <p:inputText id="lastName" value="#{userController.user.prenomUser}" />
+                        <h:outputText value="Password : " />  
+                        <p:password id="passwd" value="#{userController.user.mdpUser}" />
+                    </h:panelGrid>  
+                    <p:commandButton value="Connect" action="#{userController.connexion('mdpana','Anais','Falaize')}" ajax="false" /> 
+                </p:panel>  
+
+
+
+            </h:form>
+        </p:layoutUnit>
     </h:body>
 </html>
 
