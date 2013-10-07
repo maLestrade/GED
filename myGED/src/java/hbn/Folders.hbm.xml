@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2013 11:37:49 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="hbn.Folders" table="folders" catalog="jee">
+        <id name="idFolder" type="java.lang.Integer">
+            <column name="ID_FOLDER" />
+            <generator class="identity" />
+        </id>
+        <property name="intituleFolder" type="string">
+            <column name="INTITULE_FOLDER" length="65535" />
+        </property>
+        <property name="typeFolder" type="string">
+            <column name="TYPE_FOLDER" length="65535" />
+        </property>
+        <property name="cheminFolder" type="string">
+            <column name="CHEMIN_FOLDER" length="65535" />
+        </property>
+        <property name="tailleFolder" type="java.lang.Long">
+            <column name="TAILLE_FOLDER" precision="10" scale="0" />
+        </property>
+        <set name="documentses" inverse="false" table="possede">
+            <key>
+                <column name="ID_FOLDER" not-null="true" />
+            </key>
+            <many-to-many entity-name="hbn.Documents">
+                <column name="ID_DOCUMENTS" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="metadataFolds" inverse="true">
+            <key>
+                <column name="ID_FOLDER" not-null="true" />
+            </key>
+            <one-to-many class="hbn.MetadataFold" />
+        </set>
+    </class>
+</hibernate-mapping>

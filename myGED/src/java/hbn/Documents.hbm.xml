@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2013 11:37:49 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="hbn.Documents" table="documents" catalog="jee">
+        <id name="idDocuments" type="java.lang.Integer">
+            <column name="ID_DOCUMENTS" />
+            <generator class="identity" />
+        </id>
+        <property name="nomDocument" type="string">
+            <column name="NOM_DOCUMENT" length="65535" />
+        </property>
+        <property name="extentionDocument" type="string">
+            <column name="EXTENTION_DOCUMENT" length="65535" />
+        </property>
+        <property name="tailleDoc" type="java.lang.Long">
+            <column name="TAILLE_DOC" precision="10" scale="0" />
+        </property>
+        <set name="metadataDocs" inverse="true">
+            <key>
+                <column name="ID_DOCUMENTS" not-null="true" />
+            </key>
+            <one-to-many class="hbn.MetadataDoc" />
+        </set>
+        <set name="folderses" inverse="true" table="possede">
+            <key>
+                <column name="ID_DOCUMENTS" not-null="true" />
+            </key>
+            <many-to-many entity-name="hbn.Folders">
+                <column name="ID_FOLDER" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2013 11:37:49 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="hbn.Users" table="users" catalog="jee">
+        <id name="idUser" type="java.lang.Integer">
+            <column name="ID_USER" />
+            <generator class="identity" />
+        </id>
+        <property name="nomUser" type="string">
+            <column name="NOM_USER" length="65535" />
+        </property>
+        <property name="prenomUser" type="string">
+            <column name="PRENOM_USER" length="65535" />
+        </property>
+        <property name="mdpUser" type="string">
+            <column name="MDP_USER" length="65535" />
+        </property>
+        <property name="roleUser" type="int">
+            <column name="role_user" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

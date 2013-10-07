@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2013 11:37:49 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="hbn.MetadataDoc" table="metadata_doc" catalog="jee">
+        <composite-id name="id" class="hbn.MetadataDocId">
+            <key-property name="idDocuments" type="int">
+                <column name="ID_DOCUMENTS" />
+            </key-property>
+            <key-property name="idMetadata" type="int">
+                <column name="ID_METADATA" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="metatype" class="hbn.Metatype" update="false" insert="false" fetch="select">
+            <column name="ID_METADATA" not-null="true" />
+        </many-to-one>
+        <many-to-one name="documents" class="hbn.Documents" update="false" insert="false" fetch="select">
+            <column name="ID_DOCUMENTS" not-null="true" />
+        </many-to-one>
+        <property name="valeurDoc" type="string">
+            <column name="VALEUR_DOC" length="65535" />
+        </property>
+        <property name="dateDoc" type="date">
+            <column name="DATE_DOC" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

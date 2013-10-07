@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 oct. 2013 11:37:49 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="hbn.MetadataFold" table="metadata_fold" catalog="jee">
+        <composite-id name="id" class="hbn.MetadataFoldId">
+            <key-property name="idFolder" type="int">
+                <column name="ID_FOLDER" />
+            </key-property>
+            <key-property name="idMetadata" type="int">
+                <column name="ID_METADATA" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="metatype" class="hbn.Metatype" update="false" insert="false" fetch="select">
+            <column name="ID_METADATA" not-null="true" />
+        </many-to-one>
+        <many-to-one name="folders" class="hbn.Folders" update="false" insert="false" fetch="select">
+            <column name="ID_FOLDER" not-null="true" />
+        </many-to-one>
+        <property name="valeurFold" type="string">
+            <column name="VALEUR_FOLD" length="65535" />
+        </property>
+        <property name="dateFold" type="date">
+            <column name="DATE_FOLD" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>
