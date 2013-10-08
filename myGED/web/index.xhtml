@@ -10,7 +10,6 @@
         <title>Ged App'</title>
     </h:head>
     <h:body>
-        My Ged App' !
         <br />
         <p:layoutUnit position="center" style=" width: 300px; margin-top: 15%; margin-left: 37%">  
             <h:form id="form">  
@@ -23,10 +22,8 @@
                         <h:outputText value="Password : " />  
                         <p:password id="passwd" value="#{userController.user.mdpUser}" />
                     </h:panelGrid>  
-                    <p:commandButton value="Connect" action="#{userController.connexion('mdpana','Anais','Falaize')}" ajax="false" /> 
+                    <p:commandButton value="Connect" action="#{userController.connexion()}" ajax="false" /> 
                 </p:panel>  
-
-
 
             </h:form>
         </p:layoutUnit>

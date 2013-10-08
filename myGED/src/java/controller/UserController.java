@@ -75,29 +75,27 @@ public class UserController implements Serializable {
     
     //////////////////////////////////////////////////////////////////////////////
     
-    public String connexion(String mdp, String prenom, String nom) {
-        this.user.setMdpUser(mdp);
-        this.user.setNomUser(nom);
-        this.user.setPrenomUser(prenom);
+    
+    
+    /**
+     * Permet la connexion à l'appli si le couple login/mdp est contenu dans la base
+     * @param mdp
+     * @param prenom
+     * @param nom
+     * @return 
+     */
+    public String connexion() {
         recupListUsers();
         if (listUsers!=null) {
             for (int i=0 ; listUsers.size()>i ; i++){
-                System.out.println(listUsers.get(i));
+                System.out.println("nom : " + this.user.getNomUser());
                 if ((listUsers.get(i).getNomUser().equals(this.user.getNomUser())) && (listUsers.get(i).getPrenomUser().equals(this.user.getPrenomUser())) && (listUsers.get(i).getMdpUser().equals(this.user.getMdpUser()))){
                     return "workspace";
                 }
-                else { return "index";}
             }
-        }
-        else {
-            return "index";
         }
         return "index";
     }
     
-  
-    public String affiche() {
-        //FacesContext context = FacesContext.getCurrentInstance();
-        return "workspace";
-    }
+ 
 }
