@@ -18,21 +18,19 @@ import dao.DocDAO;
 @Dependent
 public class DocController {
 
-    
     private ArrayList<Documents> docList = new ArrayList<>();
     private DocDAO docDao;
-    
-            
+
     /**
      * Creates a new instance of DocController
      */
     public DocController() {
-        docDao= new DocDAO();
-        recupListDoc();       
+        docDao = new DocDAO();
+        recupListDoc();
     }
-    
-    private void recupListDoc(){
-        if(docList!=null){
+
+    private void recupListDoc() {
+        if (docList != null) {
             setDocList(docDao.getMyDocs());
         }
     }
@@ -52,5 +50,9 @@ public class DocController {
     public void setDocDao(DocDAO docDao) {
         this.docDao = docDao;
     }
-    
+
+    public void editDocument(Documents doc) {
+        EditorBean editor;
+        
+    }
 }
