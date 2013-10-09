@@ -34,16 +34,16 @@
             <p:layout fullPage="true" >
 
                 <p:layoutUnit id="top" position="north" size="50">
-
                     <h:form>
-                        <p:menubar>
+                        <p:menubar style="width: 300px">
                             <p:submenu label="File" icon="ui-icon-document">
                                 <p:submenu label="New" icon="ui-icon-contact">
                                     <p:menuitem value="Project" url="#" />
                                     <p:menuitem value="Other" url="#" />
                                 </p:submenu>
                                 <p:menuitem value="Open" url="#" />
-                                <p:menuitem value="Quit" action="#{userController.exitWotkspace()}" />
+                                <p:menuitem value="Quit" action="#{userController.exitWorkspace()}" />
+
                             </p:submenu>
 
                             <p:submenu label="Edit" icon="ui-icon-pencil">
@@ -63,13 +63,13 @@
 
                             <p:menuitem value="Quit" action="#{userController.exitWorkspace()}" icon="ui-icon-close" ajax="false"/>
 
-
                         </p:menubar>
+                        <h1 style="width: 400px; margin-left: auto; margin-top: -35px;font-family: sans-serif;font-style: italic; font-size: 28px;">Ged ' App for Gphy Bank</h1>
                     </h:form>
                 </p:layoutUnit>
 
-                <p:layoutUnit id="bottom" position="south" size="60">
-
+                <p:layoutUnit id="bottom" position="south" size="35">
+                    <h3 style=" margin:auto; margin-left: 50%">Ged ' App &copy; 2013</h3>
                 </p:layoutUnit>
 
                 <p:layoutUnit id="left" position="west" size="300" resizable="true" closable="false" collapsible="true" header="Arborescence" minSize="200">
@@ -87,18 +87,25 @@
 
 
                 <p:layoutUnit id="center" position="center">
+                    
                     <h:form>
+                        <p:editor id="editor" value="#{editorBean.value}" width="600"/>  
 
+                        <h:panelGrid columns="2" style="margin-top:10px">  
+                            <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg').show()"  
+                                             icon="ui-icon-disk" />  
+                            <p:commandButton id="clearButton" type="button" value="Clear" onclick="PF('editor').clear()"  
+                                             icon="ui-icon-close" />  
+                        </h:panelGrid>  
 
-
+                        <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true">  
+                            <h:outputText id="display" value="#{editorBean.value}" escape="false" />  
+                        </p:dialog>  
                     </h:form>
                 </p:layoutUnit>
 
             </p:layout>
 
-            <p:dialog header="Basic Dialog" widgetVar="dlg" modal="true">
-                <h:outputText value="Resistance to PrimeFaces is futile!" />
-            </p:dialog>
 
         </h:body>
 
