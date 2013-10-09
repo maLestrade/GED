@@ -8,25 +8,30 @@
     <link type="text/css" rel="stylesheet" href="cssGEDAPP.css" />
     <h:head>
         <title>Ged App'</title>
+        <div id="header-image" align="center" style="margin-top: -10px">
+            <img id="ban" src="banniere-gedapp.jpg" />
+        </div>
     </h:head>
     <h:body>
         <br />
-        <p:layoutUnit position="center" style=" width: 300px; margin-top: 15%; margin-left: 37%">  
+        <p:growl id="growl" showDetail="true" sticky="true" />  
+        <p:layoutUnit position="center" style=" width: 300px; margin:auto">  
             <h:form id="form">  
-                <p:panel id="modCon" header="LOG" >  
-                    <h:panelGrid columns="2">  
+                <p:panel id="modCon" header="LOGIN" >  
+                    <h:panelGrid columns="2" >  
                         <h:outputText value="Name : " />  
-                        <p:inputText id="name" value="#{userController.user.nomUser}" />
+                        <p:inputText id="name" value="#{userController.user.nomUser}"  required="true"/>
                         <h:outputText value="LastName : " />  
-                        <p:inputText id="lastName" value="#{userController.user.prenomUser}" />
+                        <p:inputText id="lastName" value="#{userController.user.prenomUser}" required="true"/>
                         <h:outputText value="Password : " />  
-                        <p:password id="passwd" value="#{userController.user.mdpUser}" />
+                        <p:password id="passwd" value="#{userController.user.mdpUser}" required="true"/>
                     </h:panelGrid>  
-                    <p:commandButton value="Connect" action="#{userController.connexion()}" ajax="false" /> 
+                    <p:commandButton value="Connect" action="#{userController.connexion()}" ajax="false"  update="growl1"/> 
                 </p:panel>  
 
             </h:form>
         </p:layoutUnit>
+        <br />
     </h:body>
 </html>
 

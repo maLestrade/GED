@@ -43,7 +43,7 @@
                                     <p:menuitem value="Other" url="#" />
                                 </p:submenu>
                                 <p:menuitem value="Open" url="#" />
-                                <p:menuitem value="Quit" url="#" />
+                                <p:menuitem value="Quit" action="#{userController.exitWotkspace()}" />
                             </p:submenu>
 
                             <p:submenu label="Edit" icon="ui-icon-pencil">
@@ -61,7 +61,7 @@
                                 </p:submenu>
                             </p:submenu>
 
-                            <p:menuitem value="Quit" action="index" icon="ui-icon-close" />
+                            <p:menuitem value="Quit" action="#{userController.exitWorkspace()}" icon="ui-icon-close" ajax="false"/>
 
 
                         </p:menubar>
