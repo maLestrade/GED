@@ -32,7 +32,7 @@ public class DocDAO {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
-            Query q = session.createQuery("from Documents doc INNER JOIN doc.metadataDocs meta where meta.metatype.intituleMetadata='createur'");
+            Query q = session.createQuery("select doc from Documents doc INNER JOIN doc.metadataDocs meta where meta.metatype.intituleMetadata='createur'");
             listdocs = (ArrayList<Documents>) q.list();
             tx.commit();
         } catch (Exception e) {

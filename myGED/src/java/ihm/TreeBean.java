@@ -30,19 +30,27 @@ public class TreeBean implements Serializable {
         System.out.println("dans le treeeeeeeeeeeeeeeeee");
         docController = new DocController();
         ArrayList<Documents> listDoc = docController.getDocList();
-
+        
         if (listDoc != null) {
             root = new DefaultTreeNode("RACINE", null);
             
             TreeNode node0 = new DefaultTreeNode("ETATS DES COMPTES", root);
             TreeNode node1 = new DefaultTreeNode("PRETS", root);
+            TreeNode node11 = new DefaultTreeNode("MAISON", node1);
+            TreeNode node12 = new DefaultTreeNode("VOITURE", node1);
 
+            
              for(Iterator it=listDoc.iterator(); it.hasNext();) {
                 Documents doc = (Documents) it.next();
                 if (doc.getNomDocument().contains("etat")) {
                     new DefaultTreeNode(doc.getNomDocument(), node0);
                 } else if (doc.getNomDocument().contains("pret")) {
-                    new DefaultTreeNode(doc.getNomDocument(), node1);
+                    if(doc.getNomDocument().contains("maison")) {
+                        new DefaultTreeNode(doc.getNomDocument(), node11);
+                    }
+                    else if(doc.getNomDocument().contains("voiture")) {
+                        new DefaultTreeNode(doc.getNomDocument(), node12);
+                    }
                 }
             }
         }
