@@ -118,4 +118,8 @@ public class UserController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Connexion établie", "Connexion réussie."));
     }
+    
+    public String goStats(){
+        return "stats";
+    }
 }

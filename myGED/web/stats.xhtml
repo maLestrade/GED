@@ -8,12 +8,7 @@
 
     <f:view contentType="text/html">
         <h:head>
-            <script>
-                function sendResult()
-                {
-                    return(document.getElementById("texteArea").value);
-                }
-            </script>
+
             <f:facet name="first">
                 <meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
@@ -50,6 +45,7 @@
                                 <p:menuitem value="Open" url="#" />
                                 <p:menuitem value="Quit" action="#{userController.exitWorkspace()}" />
 
+
                             </p:submenu>
 
                             <p:submenu label="Edit" icon="ui-icon-pencil">
@@ -67,7 +63,7 @@
                                 </p:submenu>
                             </p:submenu>
 
-                            <p:menuitem value="Stats" action="#{userController.goStats()}" ajax="false" />
+                            <p:menuitem value="Stats" action="stats" />
 
                             <p:menuitem value="Quit" action="#{userController.exitWorkspace()}" icon="ui-icon-close" ajax="false"/>
 
@@ -80,44 +76,18 @@
                     <h3 style=" margin:auto; margin-left: 50%">Ged ' App &copy; 2013</h3>
                 </p:layoutUnit>
 
-                <p:layoutUnit id="left" position="west" size="300" resizable="true" closable="false" collapsible="true" header="Arborescence" minSize="200">
-                    <h:form id="form">  
-                        <p:tree value="#{treeBean.root}" var="node" dynamic="true" cache="false"  
-                                selectionMode="single"  selection="#{treeBean.selectedNode}" id="tree">   
-                            <p:ajax  event="select" update=":panelEditor" listener="#{treeBean.onNodeSelect}"  />  
-
-                            <p:treeNode id="treeNode">  
-                                <h:outputText value="#{node}"/>  
-                            </p:treeNode>  
-                        </p:tree>  
-
-                    </h:form> 
+                
+                <p:layoutUnit id="left" position="west" size="300" resizable="true" closable="false" collapsible="true" header="STATS Ged'APP" minSize="200">
+                    
+                    <p align="center">Repartition des types documentaire de la GED</p>
 
                 </p:layoutUnit>
-                <p:layoutUnit id="center"  position="center">
-                    <h:panelGrid id="panelEditor" rendered="#{treeBean.showFormEditor(treeBean.getNomDoc())}" columns="2" >
-                        <p:column>
-                            <h:form id="formEditor">
-                                <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script> 
-                                <script>tinymce.init({selector: 'textarea'});</script>
-                                <h:inputTextarea value="#{docController.inputText}" id="texteArea"/>
-                                <h:commandButton type="Submit" value="Sauvegarder" action="#{docController.sauvegardeDoc()}"/>  
-                            </h:form>  
-                        </p:column>
-                        <p:column>
-                            <h:form>  
-                                <p:growl id="messages" showDetail="true" />  
-                                <p:commandButton value="Quitter" actionListener="#{docController.confirmClose}" update="messages">  
-                                    <p:confirmDialog header="Confirmation" message="Are you sure?" showEffect="fade" hideEffect="explode">  
-                                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
-                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
-                                    </p:confirmDialog>  
-                                </p:commandButton>  
-                                <p:commandButton value="Sauvegarder et quitter" actionListener="#{docController.saveAnsQuit}" update=":panelEditor"/>  
 
-                            </h:form> 
-                        </p:column>
-                    </h:panelGrid>
+                <p:layoutUnit id="center" position="center">
+
+                    <p:pieChart id="custom" value="#{chartBean.pieModel}" legendPosition="e" fill="false" showDataLabels="true"  
+                                style="width:400px;height:300px" sliceMargin="5" diameter="150" />  
+
                 </p:layoutUnit>
             </p:layout>
 

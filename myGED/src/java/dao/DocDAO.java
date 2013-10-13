@@ -42,15 +42,14 @@ public class DocDAO {
         }
         return listdocs;
     }
-	
-	
-	public ArrayList getDocsSpeAuteur() {
+
+    public ArrayList getDocsSpeAuteur() {
         String nomUser = Users.NOM_USER;
         ArrayList<Documents> listdocs = null;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
-            Query q = session.createQuery("select doc from Documents doc INNER JOIN doc.metadataDocs meta where meta.metatype.intituleMetadata='createur' AND meta.valeurDoc='"+nomUser+"'");
+            Query q = session.createQuery("select doc from Documents doc INNER JOIN doc.metadataDocs meta where meta.metatype.intituleMetadata='createur' AND meta.valeurDoc='" + nomUser + "'");
             listdocs = (ArrayList<Documents>) q.list();
             tx.commit();
         } catch (Exception e) {
@@ -58,10 +57,8 @@ public class DocDAO {
         }
         return listdocs;
     }
-        
-        
-        
-        public ArrayList getDocsSecretaire() {
+
+    public ArrayList getDocsSecretaire() {
         ArrayList<Documents> listdocs = null;
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -74,10 +71,21 @@ public class DocDAO {
         }
         return listdocs;
     }
-	
-	
-	
-	
+
+    public int getNbResult(String nomDoc) {
+        int nb = 0;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction tx = session.beginTransaction();
+            Query q = session.createQuery("select count from Documents WHERE nom_document LIKE '%" + nomDoc + "%'");
+            nb = (int) q.list().size();
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nb;
+    }
+
     public ArrayList getThisDocument(String nomDoc) {
         ArrayList<String> listdocs = null;
         MetadataDoc metadata = null;
@@ -85,7 +93,7 @@ public class DocDAO {
         try {
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             Transaction tx = session.beginTransaction();
-            Query q = session.createQuery("select mD.valeurDoc from MetadataDoc as mD inner join mD.metatype as meta where mD.documents=(select doc.idDocuments from Documents as doc where doc.nomDocument='"+nomDoc+"')");
+            Query q = session.createQuery("select mD.valeurDoc from MetadataDoc as mD inner join mD.metatype as meta where mD.documents=(select doc.idDocuments from Documents as doc where doc.nomDocument='" + nomDoc + "')");
             listdocs = (ArrayList<String>) q.list();
             System.out.println(listdocs.get(0));
             tx.commit();
