@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+    </head>
+    <body>
+        <p:layoutUnit id="center" position="center">
+            <h:form style="h">
+                <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+                <script>tinymce.init({selector: 'textarea'});</script>
+                <textarea>#{docController.openDocument('pret_maison1')}</textarea>
+            </h:form>
+        </p:layoutUnit>
+    </body>
+</html>

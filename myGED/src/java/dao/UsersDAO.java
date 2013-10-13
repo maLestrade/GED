@@ -48,18 +48,4 @@ public class UsersDAO implements Serializable {
 }
 
    
-        
     
-
-//    public Integer ajouteUtilisateur(Utilisateur utilisateur) {
-//        Integer idUser = null;
-//        try {
-//            session = NewHibernateUtil.getSessionFactory().getCurrentSession();
-//            Transaction tx = session.beginTransaction();
-//            idUser = (Integer) session.save(utilisateur);
-//            tx.commit();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return idUser;
-//    }

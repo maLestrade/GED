@@ -10,7 +10,9 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import hbn.Users;
 import dao.UsersDAO;
+import java.util.Map;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 /**
@@ -46,7 +48,7 @@ public class UserController implements Serializable {
 
     //////////////////////////////GET & SET/////////////////////////////////
     public Users getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(Users user) {
@@ -85,6 +87,8 @@ public class UserController implements Serializable {
             for (int i = 0; listUsers.size() > i; i++) {
                 System.out.println("nom : " + this.user.getNomUser());
                 if ((listUsers.get(i).getNomUser().equals(this.user.getNomUser())) && (listUsers.get(i).getPrenomUser().equals(this.user.getPrenomUser())) && (listUsers.get(i).getMdpUser().equals(this.user.getMdpUser()))) {
+                    Users.NOM_USER=this.user.getNomUser();
+                    Users.PROFILE_USER=this.user.getRoleUser();
                     return "workspace";
                 }
             }

@@ -5,8 +5,15 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
+
     <f:view contentType="text/html">
         <h:head>
+            <script>
+                function sendResult()
+                {
+                    return(document.getElementById("texteArea").value);
+                }
+            </script>
             <f:facet name="first">
                 <meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
@@ -31,8 +38,7 @@
 
         <h:body>
 
-            <p:layout fullPage="true" >
-
+            <p:layout fullPage="true" id="bodyP">
                 <p:layoutUnit id="top" position="north" size="50">
                     <h:form>
                         <p:menubar style="width: 300px">
@@ -74,36 +80,43 @@
 
                 <p:layoutUnit id="left" position="west" size="300" resizable="true" closable="false" collapsible="true" header="Arborescence" minSize="200">
                     <h:form id="form">  
+                        <p:tree value="#{treeBean.root}" var="node" dynamic="true" cache="false"  
+                                selectionMode="single"  selection="#{treeBean.selectedNode}" id="tree">   
+                            <p:ajax  event="select" update=":panelEditor" listener="#{treeBean.onNodeSelect}"  />  
 
-                        <p:tree value="#{treeBean.root}" var="node" id="tree">  
                             <p:treeNode id="treeNode">  
-                                <h:outputText value="#{node}" id="lblNode"/>  
+                                <h:outputText value="#{node}"/>  
                             </p:treeNode>  
                         </p:tree>  
 
                     </h:form> 
+
                 </p:layoutUnit>
+                <p:layoutUnit id="center"  position="center">
+                    <h:panelGrid id="panelEditor" rendered="#{treeBean.showFormEditor(treeBean.getNomDoc())}" columns="2" >
+                        <p:column>
+                            <h:form id="formEditor">
+                                <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script> 
+                                <script>tinymce.init({selector: 'textarea'});</script>
+                                <h:inputTextarea value="#{docController.inputText}" id="texteArea"/>
+                                <h:commandButton type="Submit" value="Sauvegarder" action="#{docController.sauvegardeDoc()}"/>  
+                            </h:form>  
+                        </p:column>
+                        <p:column>
+                            <h:form>  
+                                <p:growl id="messages" showDetail="true" />  
+                                <p:commandButton value="Quitter" actionListener="#{docController.confirmClose}" update="messages">  
+                                    <p:confirmDialog header="Confirmation" message="Are you sure?" showEffect="fade" hideEffect="explode">  
+                                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                                    </p:confirmDialog>  
+                                </p:commandButton>  
+                                <p:commandButton value="Sauvegarder et quitter" actionListener="#{docController.saveAnsQuit}" update=":panelEditor"/>  
 
-
-
-                <p:layoutUnit id="center" position="center">
-                    
-                    <h:form>
-                        <p:editor id="editor" value="#{editorBean.value}" width="600"/>  
-
-                        <h:panelGrid columns="2" style="margin-top:10px">  
-                            <p:commandButton id="submitButton" value="Submit" update="display" oncomplete="PF('dlg').show()"  
-                                             icon="ui-icon-disk" />  
-                            <p:commandButton id="clearButton" type="button" value="Clear" onclick="PF('editor').clear()"  
-                                             icon="ui-icon-close" />  
-                        </h:panelGrid>  
-
-                        <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade" modal="true">  
-                            <h:outputText id="display" value="#{editorBean.value}" escape="false" />  
-                        </p:dialog>  
-                    </h:form>
+                            </h:form> 
+                        </p:column>
+                    </h:panelGrid>
                 </p:layoutUnit>
-
             </p:layout>
 
 
