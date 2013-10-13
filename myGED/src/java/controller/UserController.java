@@ -86,9 +86,10 @@ public class UserController implements Serializable {
         if (listUsers != null) {
             for (int i = 0; listUsers.size() > i; i++) {
                 System.out.println("nom : " + this.user.getNomUser());
-                if ((listUsers.get(i).getNomUser().equals(this.user.getNomUser())) && (listUsers.get(i).getPrenomUser().equals(this.user.getPrenomUser())) && (listUsers.get(i).getMdpUser().equals(this.user.getMdpUser()))) {
+                if ((listUsers.get(i).getNomUser().equalsIgnoreCase(this.user.getNomUser())) && (listUsers.get(i).getPrenomUser().equalsIgnoreCase(this.user.getPrenomUser())) && (listUsers.get(i).getMdpUser().equalsIgnoreCase(this.user.getMdpUser()))) {
                     Users.NOM_USER=this.user.getNomUser();
-                    Users.PROFILE_USER=this.user.getRoleUser();
+                    System.out.println("profil : " + listUsers.get(i).getRoleUser());
+                    Users.PROFILE_USER=listUsers.get(i).getRoleUser();
                     return "workspace";
                 }
             }

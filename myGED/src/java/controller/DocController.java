@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import dao.DocDAO;
+import hbn.Users;
 import ihm.TreeBean;
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
@@ -40,8 +41,13 @@ public class DocController implements Serializable {
      */
     public DocController() {
         docDao = new DocDAO();
-        recupListSpeDoc();
-
+        if(Users.PROFILE_USER==1){
+            recupListDoc();
+        }else if(Users.PROFILE_USER==2){
+            recupListSpeDoc();
+        }else if(Users.PROFILE_USER==3){
+            recupListSecretaire();
+        }
     }
 
     public String getInputText() {
@@ -67,6 +73,12 @@ public class DocController implements Serializable {
     private void recupListSpeDoc() {
         if (docList != null) {
             setDocList(docDao.getDocsSpeAuteur());
+        }
+    }
+    
+    private void recupListSecretaire(){
+        if(docList!=null){
+            setDocList(docDao.getDocsSecretaire());
         }
     }
 

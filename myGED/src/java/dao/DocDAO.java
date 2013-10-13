@@ -58,6 +58,22 @@ public class DocDAO {
         }
         return listdocs;
     }
+        
+        
+        
+        public ArrayList getDocsSecretaire() {
+        ArrayList<Documents> listdocs = null;
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Transaction tx = session.beginTransaction();
+            Query q = session.createQuery("select doc from Documents doc INNER JOIN doc.metadataDocs meta where meta.metatype.intituleMetadata='type' AND meta.valeurDoc='SECRETARIAT'");
+            listdocs = (ArrayList<Documents>) q.list();
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listdocs;
+    }
 	
 	
 	
