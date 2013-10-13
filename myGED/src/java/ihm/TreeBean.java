@@ -67,31 +67,24 @@ public class TreeBean implements Serializable {
                 root = new DefaultTreeNode("RACINE", null);
 
                 TreeNode node0 = new DefaultTreeNode("FACTURES", root);
-                
-                for (Iterator it = listDoc.iterator(); it.hasNext();) {
-                    Documents doc = (Documents) it.next();
-                    if (doc.getNomDocument().contains("facture")) {
-                        new DefaultTreeNode(doc.getNomDocument(), node0);
-                    }
-                }
-                
-                TreeNode node1 = new DefaultTreeNode("FEUILLES SALAIRES", root);
-                ArrayList listNomSalarie = recupNomSalarie(listDoc);
-                
-                for (int i = 0; i < listNomSalarie.size(); i++) {
-                    TreeNode node_aux = new DefaultTreeNode(listNomSalarie.get(i), node1);
-                    for (Iterator it = listDoc.iterator(); it.hasNext();) {
-                        Documents doc = (Documents) it.next();
-                        if (doc.getNomDocument().contains((CharSequence) listNomSalarie.get(i))) {
-                            new DefaultTreeNode(doc.getNomDocument(), node_aux);
-                        }
-                    }
-                }
 
                 for (Iterator it = listDoc.iterator(); it.hasNext();) {
                     Documents doc = (Documents) it.next();
                     if (doc.getNomDocument().contains("facture")) {
                         new DefaultTreeNode(doc.getNomDocument(), node0);
+                    }
+                }
+
+                TreeNode node1 = new DefaultTreeNode("FEUILLES SALAIRES", root);
+                ArrayList listNomSalarie = recupNomSalarie(listDoc);
+
+                for (int i = 0; i < listNomSalarie.size(); i++) {
+                    TreeNode node_aux = new DefaultTreeNode(listNomSalarie.get(i), node1);
+                    for (Iterator it = listDoc.iterator(); it.hasNext();) {
+                        Documents doc = (Documents) it.next();
+                        if (doc.getNomDocument().toUpperCase().contains((CharSequence) listNomSalarie.get(i))) {
+                            new DefaultTreeNode(doc.getNomDocument(), node_aux);
+                        }
                     }
                 }
             }
@@ -173,7 +166,9 @@ public class TreeBean implements Serializable {
             Documents doc = (Documents) it.next();
             if (doc.getNomDocument().contains("salaire")) {
                 nom_aux = appliqueRegEx(doc.getNomDocument(), "(.*_.*_)(.*)(\\d{1})", 2);
-                listNom.add(nom_aux);
+                if (!listNom.contains(nom_aux.toUpperCase())) {
+                    listNom.add(nom_aux.toUpperCase());
+                }
             }
         }
         return listNom;
