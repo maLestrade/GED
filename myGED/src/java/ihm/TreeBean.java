@@ -28,7 +28,7 @@ import org.primefaces.model.TreeNode;
 public class TreeBean implements Serializable {
 
     private DocController docController;
-    private TreeNode root;
+    private TreeNode root=null;
     private TreeNode selectedNode;
     private UIComponent panelEditorForm;
     private static String nomDoc = "-1";
@@ -92,7 +92,8 @@ public class TreeBean implements Serializable {
     }
 
     public TreeNode getRoot() {
-        return root;
+        TreeBean tree=new TreeBean();
+        return tree.root;
     }
 
     public TreeNode getSelectedNode() {

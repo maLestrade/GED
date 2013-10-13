@@ -4,12 +4,14 @@
  */
 package controller;
 
+import config.HibernateUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import hbn.Users;
 import dao.UsersDAO;
+import ihm.TreeBean;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -98,6 +100,7 @@ public class UserController implements Serializable {
     }
 
     public String exitWorkspace() {
+        HibernateUtil.getSessionFactory().close();
         return "index";
     }
 
